@@ -6,14 +6,20 @@ package br.com.rpg.modelo;
 public abstract class Personagem {
     protected String nome;
     protected int vida;
+    protected int mana;
+    protected int manaMaxima;
     protected int forca;
     protected int defesa;
+    protected int experiencia;
 
-    public Personagem(String nome, int vida, int forca, int defesa) {
+    public Personagem(String nome, int vida, int mana, int forca, int defesa) {
         this.nome = nome;
         this.vida = vida;
+        this.mana = mana;
+        this.manaMaxima = mana;
         this.forca = forca;
         this.defesa = defesa;
+        this.experiencia = 0;
     }
 
     public String getNome() {
@@ -24,6 +30,14 @@ public abstract class Personagem {
         return vida;
     }
 
+    public int getMana() {
+        return mana;
+    }
+
+    public int getManaMaxima() {
+        return manaMaxima;
+    }
+
     public int getForca() {
         return forca;
     }
@@ -32,22 +46,53 @@ public abstract class Personagem {
         return defesa;
     }
 
+    public int getExperiencia() {
+        return experiencia;
+    }
+
     public void setVida(int vida) {
         this.vida = vida;
     }
 
-    /**
-     * Método abstrato para ataque específico de cada classe.
-     */
-    public abstract int atacar();
+    public void setMana(int mana) {
+        this.mana = Math.max(0, Math.min(mana, manaMaxima));
+    }
 
     /**
-     * Método para receber dano.
+     * Ganha experiência e exibe mensagem.
      */
-    public void receberDano(int dano) {
+    public void ganharExperiencia(int xp) {
+        this.experiencia += xp;
+        System.out.println(nome + " ganhou " + xp + " de experiência! Total: " + experiencia);
+    }
+
+    /**
+     * Método para receber dano. Retorna true se o personagem foi derrotado.
+     */
+    public boolean receberDano(int dano) {
         int danoReal = Math.max(0, dano - defesa);
         vida = Math.max(0, vida - danoReal);
         System.out.println(nome + " recebeu " + danoReal + " de dano! Vida restante: " + vida);
+        
+        if (vida <= 0) {
+            System.out.println(nome + " foi derrotado!");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se tem mana suficiente.
+     */
+    public boolean temMana(int custo) {
+        return mana >= custo;
+    }
+
+    /**
+     * Consome mana.
+     */
+    public void consumirMana(int custo) {
+        mana -= custo;
     }
 
     /**
@@ -56,4 +101,19 @@ public abstract class Personagem {
     public boolean estaVivo() {
         return vida > 0;
     }
+
+    /**
+     * Retorna o tipo do personagem.
+     */
+    public abstract String getTipo();
+
+    /**
+     * Método abstrato para ataque.
+     */
+    public abstract void atacar(Personagem alvo);
+
+    /**
+     * Método abstrato para habilidade especial.
+     */
+    public abstract void usarHabilidadeEspecial(Personagem alvo);
 }

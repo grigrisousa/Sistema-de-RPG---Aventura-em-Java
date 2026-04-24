@@ -12,7 +12,7 @@ public class Arena {
      */
     public static void iniciarBatalha(Personagem p1, Personagem p2) {
         System.out.println("=== BATALHA INICIADA ===");
-        System.out.println(p1.getNome() + " VS " + p2.getNome());
+        System.out.println(p1.getNome() + " (" + p1.getTipo() + ") VS " + p2.getNome() + " (" + p2.getTipo() + ")");
         System.out.println();
 
         int turno = 1;
@@ -21,8 +21,7 @@ public class Arena {
             System.out.println("--- Turno " + turno + " ---");
 
             // Turno do primeiro personagem
-            int dano1 = p1.atacar();
-            p2.receberDano(dano1);
+            p1.atacar(p2);
             System.out.println();
 
             if (!p2.estaVivo()) {
@@ -32,8 +31,7 @@ public class Arena {
             }
 
             // Turno do segundo personagem
-            int dano2 = p2.atacar();
-            p1.receberDano(dano2);
+            p2.atacar(p1);
             System.out.println();
 
             if (!p1.estaVivo()) {

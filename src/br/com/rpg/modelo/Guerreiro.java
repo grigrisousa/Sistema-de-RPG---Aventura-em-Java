@@ -6,16 +6,43 @@ package br.com.rpg.modelo;
 public class Guerreiro extends Personagem {
 
     public Guerreiro(String nome) {
-        super(nome, 120, 25, 15);
+        super(nome, 150, 30, 25, 20);
     }
 
     @Override
-    public int atacar() {
-        System.out.println(nome + " (Guerreiro) ataca com sua espada!");
-        return forca;
+    public void atacar(Personagem alvo) {
+        System.out.println(nome + " desfere um golpe poderoso!");
+        int dano = (int)(forca * 1.2);
+        boolean derrotado = alvo.receberDano(dano);
+        
+        if (derrotado) {
+            ganharExperiencia(50);
+        }
     }
 
-    public void usarEscudo() {
-        System.out.println(nome + " levanta o escudo e aumenta sua defesa!");
+    @Override
+    public void usarHabilidadeEspecial(Personagem alvo) {
+        String nomeHabilidade = "Investida Furiosa";
+        int custoMana = 20;
+        
+        if (temMana(custoMana)) {
+            System.out.println("⚔️ " + nome + " usa " + nomeHabilidade + "!");
+            System.out.println("    Um golpe devastador que atravessa a defesa do inimigo!");
+            consumirMana(custoMana);
+            
+            int dano = (int)(forca * 2.5);
+            boolean derrotado = alvo.receberDano(dano);
+            
+            if (derrotado) {
+                ganharExperiencia(50);
+            }
+        } else {
+            System.out.println(nome + " não tem mana suficiente para usar " + nomeHabilidade + "!");
+        }
+    }
+
+    @Override
+    public String getTipo() {
+        return "Guerreiro";
     }
 }

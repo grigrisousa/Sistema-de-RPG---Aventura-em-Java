@@ -21,9 +21,9 @@ public class JogoRPG {
         Arqueiro arqueiro = new Arqueiro("Legolas");
 
         System.out.println("Personagens criados:");
-        System.out.println("- " + guerreiro.getNome() + " (Guerreiro) - Vida: " + guerreiro.getVida() + ", Força: " + guerreiro.getForca());
-        System.out.println("- " + mago.getNome() + " (Mago) - Vida: " + mago.getVida() + ", Força: " + mago.getForca());
-        System.out.println("- " + arqueiro.getNome() + " (Arqueiro) - Vida: " + arqueiro.getVida() + ", Força: " + arqueiro.getForca());
+        System.out.println("- " + guerreiro.getNome() + " (" + guerreiro.getTipo() + ") - Vida: " + guerreiro.getVida() + ", Mana: " + guerreiro.getMana() + "/" + guerreiro.getManaMaxima() + ", Força: " + guerreiro.getForca() + ", Defesa: " + guerreiro.getDefesa());
+        System.out.println("- " + mago.getNome() + " (" + mago.getTipo() + ") - Vida: " + mago.getVida() + ", Mana: " + mago.getMana() + "/" + mago.getManaMaxima() + ", Força: " + mago.getForca() + ", Defesa: " + mago.getDefesa());
+        System.out.println("- " + arqueiro.getNome() + " (" + arqueiro.getTipo() + ") - Vida: " + arqueiro.getVida() + ", Mana: " + arqueiro.getMana() + "/" + arqueiro.getManaMaxima() + ", Força: " + arqueiro.getForca() + ", Defesa: " + arqueiro.getDefesa() + ", Flechas: " + arqueiro.getFlechas());
         System.out.println();
 
         // Batalha entre Guerreiro e Mago
