@@ -1,8 +1,5 @@
 package br.com.rpg.modelo;
 
-/**
- * Classe que representa um Arqueiro, uma classe de ataque à distância.
- */
 public class Arqueiro extends Personagem {
     private int flechas;
 
@@ -21,7 +18,7 @@ public class Arqueiro extends Personagem {
             System.out.println(nome + " dispara uma flecha certeira!");
             flechas--;
             
-            int dano = (int)(forca * 1.3);
+            int dano = (int)(ataque * 1.3);
             boolean derrotado = alvo.receberDano(dano);
             
             if (derrotado) {
@@ -44,10 +41,9 @@ public class Arqueiro extends Personagem {
             consumirMana(custoMana);
             flechas -= custoFlechas;
             
-            // 3 ataques consecutivos
             for (int i = 1; i <= 3; i++) {
                 if (alvo.estaVivo()) {
-                    int dano = (int)(forca * 2.0);
+                    int dano = (int)(ataque * 2.0);
                     System.out.println("    Flecha " + i + ": " + dano + " de dano!");
                     boolean derrotado = alvo.receberDano(dano);
                     
@@ -66,9 +62,6 @@ public class Arqueiro extends Personagem {
         }
     }
 
-    /**
-     * Método exclusivo do Arqueiro para recarregar flechas.
-     */
     public void recarregarFlechas(int quantidade) {
         flechas += quantidade;
         System.out.println(nome + " recarregou " + quantidade + " flechas! Total: " + flechas);

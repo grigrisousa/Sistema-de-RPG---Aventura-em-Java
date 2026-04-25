@@ -1,8 +1,5 @@
 package br.com.rpg.modelo;
 
-/**
- * Classe que representa um Mago, uma classe especializada em magia.
- */
 public class Mago extends Personagem {
 
     public Mago(String nome) {
@@ -17,7 +14,7 @@ public class Mago extends Personagem {
             System.out.println(nome + " lança uma bola de fogo!");
             consumirMana(custoMana);
             
-            int dano = (int)(forca * 1.5);
+            int dano = (int)(ataque * 1.5);
             boolean derrotado = alvo.receberDano(dano);
             
             if (derrotado) {
@@ -38,7 +35,7 @@ public class Mago extends Personagem {
             System.out.println("    Um meteoro incandescente cai do céu em direção ao inimigo!");
             consumirMana(custoMana);
             
-            int dano = (int)(forca * 3.0);
+            int dano = (int)(ataque * 3.0);
             boolean derrotado = alvo.receberDano(dano);
             
             if (derrotado) {
@@ -49,9 +46,6 @@ public class Mago extends Personagem {
         }
     }
 
-    /**
-     * Método exclusivo do Mago para regenerar mana.
-     */
     public void regenerarMana(int quantidade) {
         mana = Math.min(mana + quantidade, manaMaxima);
         System.out.println(nome + " regenerou mana! Mana atual: " + mana + "/" + manaMaxima);
