@@ -1,25 +1,27 @@
 package br.com.rpg.modelo;
 
-/**
- * Classe abstrata que representa um personagem genérico no RPG.
- */
 public abstract class Personagem {
     protected String nome;
+    protected int nivel;
     protected int vida;
+    protected int vidaMaxima;
     protected int mana;
     protected int manaMaxima;
-    protected int forca;
+    protected int ataque;
     protected int defesa;
     protected int experiencia;
 
-    public Personagem(String nome, int vida, int mana, int forca, int defesa) {
+    public Personagem(String nome, int vida, int mana, int ataque, int defesa) {
         this.nome = nome;
         this.vida = vida;
         this.mana = mana;
         this.manaMaxima = mana;
-        this.forca = forca;
+        this.ataque();
         this.defesa = defesa;
         this.experiencia = 0;
+    }
+
+    private void ataque() {
     }
 
     public String getNome() {
@@ -39,7 +41,7 @@ public abstract class Personagem {
     }
 
     public int getForca() {
-        return forca;
+        return ataque;
     }
 
     public int getDefesa() {
@@ -58,17 +60,11 @@ public abstract class Personagem {
         this.mana = Math.max(0, Math.min(mana, manaMaxima));
     }
 
-    /**
-     * Ganha experiência e exibe mensagem.
-     */
     public void ganharExperiencia(int xp) {
         this.experiencia += xp;
         System.out.println(nome + " ganhou " + xp + " de experiência! Total: " + experiencia);
     }
 
-    /**
-     * Método para receber dano. Retorna true se o personagem foi derrotado.
-     */
     public boolean receberDano(int dano) {
         int danoReal = Math.max(0, dano - defesa);
         vida = Math.max(0, vida - danoReal);
@@ -81,39 +77,21 @@ public abstract class Personagem {
         return false;
     }
 
-    /**
-     * Verifica se tem mana suficiente.
-     */
     public boolean temMana(int custo) {
         return mana >= custo;
     }
 
-    /**
-     * Consome mana.
-     */
     public void consumirMana(int custo) {
         mana -= custo;
     }
 
-    /**
-     * Verifica se o personagem está vivo.
-     */
     public boolean estaVivo() {
         return vida > 0;
     }
 
-    /**
-     * Retorna o tipo do personagem.
-     */
     public abstract String getTipo();
 
-    /**
-     * Método abstrato para ataque.
-     */
     public abstract void atacar(Personagem alvo);
 
-    /**
-     * Método abstrato para habilidade especial.
-     */
     public abstract void usarHabilidadeEspecial(Personagem alvo);
 }
